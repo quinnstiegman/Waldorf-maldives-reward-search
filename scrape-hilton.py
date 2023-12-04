@@ -9,6 +9,7 @@ from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
+import http.client, urllib
 
 # Function to wait for the presence of either price or rate_not_available element
 def wait_for_elements(driver):
@@ -106,6 +107,14 @@ for i in range(len(data) - 4):
 # Print the results
 if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
+    conn = http.client.HTTPSConnection("api.pushover.net:443")
+    conn.request("POST", "/1/messages.json",
+    urllib.parse.urlencode({
+        "token": "amgjddx35wi2ifdh886wvrq6hxvzjz",
+        "user": "uf4t2art8xmhmbr432x85qvac9uk92",
+        "message": f"2 consecutive nights found starting {two_consecutive_150k_start}",
+    }), { "Content-type": "application/x-www-form-urlencoded" })
+    conn.getresponse()
 else:
     print('There are no two consecutive dates with the value of "150k".')
 
