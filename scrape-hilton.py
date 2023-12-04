@@ -86,14 +86,14 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
 data = pd.read_csv(csv_file_path)
 
 # Check for two consecutive dates with the value '150k'
-two_consecutive_150k = None
+two_consecutive_150k_start = None
 for i in range(len(data) - 1):
     if data['price'][i] == '150K' and data['price'][i + 1] == '150K':
         two_consecutive_150k_start = data['date'][i]
         break
 
 # Check for five consecutive dates with the value '150k'
-five_consecutive_150k = None
+five_consecutive_150k_start = None
 for i in range(len(data) - 4):
     if data['price'][i] == '150K' and \
        data['price'][i + 1] == '150K' and \
@@ -104,12 +104,12 @@ for i in range(len(data) - 4):
         break
 
 # Print the results
-if two_consecutive_150k:
+if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
 else:
     print('There are no two consecutive dates with the value of "150k".')
 
-if five_consecutive_150k:
+if five_consecutive_150k_start:
     print(f'There are five consecutive dates with the value of "150k". Starting date: {five_consecutive_150k_start}')
 else:
     print('There are no five consecutive dates with the value of "150k".')
