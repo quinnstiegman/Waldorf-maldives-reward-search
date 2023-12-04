@@ -34,20 +34,20 @@ driver = webdriver.Chrome(options=options)
 # Save the results to a CSV file
 previous_prices = {}
 csv_file_path = 'output_results.csv'
-# try:
-#     with open(csv_file_path, 'r', newline='', encoding='utf-8') as csv_file:
-#         csv_reader = csv.reader(csv_file)
-#         next(csv_reader)  # Skip header
-#         for row in csv_reader:
-#             date, price, timestamp = row
-#             previous_prices[date] = (price, timestamp)
-# except FileNotFoundError:
-    # pass 
+try:
+    with open(csv_file_path, 'r', newline='', encoding='utf-8') as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)  # Skip header
+        for row in csv_reader:
+            date, price, timestamp = row
+            previous_prices[date] = (price, timestamp)
+except FileNotFoundError:
+    pass 
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
 
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2025-01','2024-02', '2024-03', '2024-04' , '2024-05' , '2024-06' , '2024-07' , '2024-08' , '2024-09' , '2024-10' , '2024-11' , '2024-12' , '2025-01' , '2025-02' ]
+    dates = ['2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
@@ -70,6 +70,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
 
         # Extract and write the date and price information
         for element in date_and_price_elements:
+            updated_prices = {}
             date = element['data-testid'].replace('arrival-', '')  # Extract date from data-testid attribute
             price_element = element.find(attrs={"data-testid": "flexDatesRoomRate"})
             rate_not_available_element = element.find(attrs={"data-testid": "rateNotAvailable"})
@@ -78,13 +79,31 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
             if price_element:
                 price = price_element.text.strip()
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                csv_writer.writerow([date, price, timestamp])
+                
+                # Check if the price is different
+                if date in previous_prices and previous_prices[date][0] != price:
+                    updated_prices[date] = (price, timestamp)
+                else:
+                    updated_prices[date] = previous_prices.get(date, (price, timestamp))
 
             if rate_not_available_element:
-                reason = rate_not_available_element.text.strip()
+                price = rate_not_available_element.text.strip()
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                csv_writer.writerow([date,reason, timestamp])
+
+                if date in previous_prices and previous_prices[date][0] != price:
+                    updated_prices[date] = (price, timestamp)
+                else:
+                    updated_prices[date] = previous_prices.get(date, (price, timestamp))
 
         # Quit the browser
         driver.quit()
+
+with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
+    csv_writer = csv.writer(csv_file)
+    csv_writer.writerow(['Date', 'Price', 'Timestamp'])  # Write header
+    for date, (price, timestamp) in updated_prices.items():
+        csv_writer.writerow([date, price, timestamp])
+
+
+
 
