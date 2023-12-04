@@ -8,6 +8,7 @@ import time
 from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
+import pandas as pd
 
 # Function to wait for the presence of either price or rate_not_available element
 def wait_for_elements(driver):
@@ -36,7 +37,7 @@ previous_prices = {}
 csv_file_path = 'output_results.csv'
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
-
+    csv_writer.writerow(['date', 'price', 'timestamp'])
     # Iterate through different variations of the URL by changing a small part
     dates = ['2024-09','2024-11']#, '2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
@@ -81,32 +82,35 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
 
 # check for 5 consectuve nights
 
-# Read the CSV file
-with open(csv_file_path, 'r') as file:
-    reader = csv.reader(file)
-    rows = list(reader)
+# Read the CSV file into a Pandas DataFrame
+data = pd.read_csv(csv_file_path)
 
-# Initialize variables
-consecutive_count = 0
-target_value = '150k'
+# Check for two consecutive dates with the value '150k'
+two_consecutive_150k = False
+for i in range(len(data) - 1):
+    if data['price'][i] == '150K' and data['price'][i + 1] == '150K':
+        two_consecutive_150k = True
+        break
 
-# Iterate through the rows starting from the second row
-for i in range(1, len(rows) - 1):
-    date = rows[i][0]
-    value = rows[i][1]
+# Check for five consecutive dates with the value '150k'
+five_consecutive_150k = False
+for i in range(len(data) - 4):
+    if data['price'][i] == '150K' and \
+       data['price'][i + 1] == '150K' and \
+       data['price'][i + 2] == '150K' and \
+       data['price'][i + 3] == '150K' and \
+       data['price'][i + 4] == '150K':
+        five_consecutive_150k = True
+        break
 
-    # Check if the value is equal to the target value
-    if value == str(target_value) and rows[i + 1][1] == str(target_value):
-        consecutive_count += 1
+# Print the results
+if two_consecutive_150k:
+    print('There are two consecutive dates with the value of "150k".')
+else:
+    print('There are no two consecutive dates with the value of "150k".')
 
-        # If 2 consecutive dates are found, print the result and break the loop
-        if consecutive_count == 2:
-            print(f"Found 2 consecutive dates with a value of {target_value} starting from {date}")
-            break
-    else:
-        consecutive_count = 0
-
-# If no consecutive dates are found, print a message
-if consecutive_count < 2:
-    print(f"No 2 consecutive dates with a value of {target_value} found.")
+if five_consecutive_150k:
+    print('There are five consecutive dates with the value of "150k".')
+else:
+    print('There are no five consecutive dates with the value of "150k".')
 
