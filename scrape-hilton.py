@@ -105,12 +105,12 @@ for i in range(len(data) - 4):
 
 # Print the results
 if two_consecutive_150k:
-    print('There are two consecutive dates with the value of "150k". Starting date:', two_consecutive_150k_start')
+    print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
 else:
     print('There are no two consecutive dates with the value of "150k".')
 
 if five_consecutive_150k:
-    print('There are five consecutive dates with the value of "150k". Starting date:', five_consecutive_150k_start')
+    print(f'There are five consecutive dates with the value of "150k". Starting date: {five_consecutive_150k_start}')
 else:
     print('There are no five consecutive dates with the value of "150k".')
 
