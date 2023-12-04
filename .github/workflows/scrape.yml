@@ -30,3 +30,7 @@ jobs:
 
     - name: Run script
       run: python scrape-hilton.py
+
+    - name: Print File Contents
+      run: |
+        cat output_results.csv

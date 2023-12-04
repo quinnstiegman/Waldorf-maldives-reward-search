@@ -87,3 +87,4 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
 
         # Quit the browser
         driver.quit()
+
