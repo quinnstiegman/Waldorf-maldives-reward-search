@@ -91,26 +91,22 @@ consecutive_count = 0
 target_value = '150k'
 
 # Iterate through the rows starting from the second row
-for i in range(1, len(rows) - 4):
+for i in range(1, len(rows) - 1):
     date = rows[i][0]
     value = rows[i][1]
 
     # Check if the value is equal to the target value
-    if value == str(target_value):
-        # Check the next 4 consecutive dates
-        if all(rows[i + j][1] == str(target_value) for j in range(1, 5)):
-            consecutive_count += 1
+    if value == str(target_value) and rows[i + 1][1] == str(target_value):
+        consecutive_count += 1
 
-            # If 5 consecutive dates are found, print the result and break the loop
-            if consecutive_count == 2:
-                print(f"Found 5 consecutive dates with a value of {target_value} starting from {date}")
-                break
-        else:
-            consecutive_count = 0
+        # If 2 consecutive dates are found, print the result and break the loop
+        if consecutive_count == 2:
+            print(f"Found 2 consecutive dates with a value of {target_value} starting from {date}")
+            break
     else:
         consecutive_count = 0
 
 # If no consecutive dates are found, print a message
-if consecutive_count < 5:
-    print(f"No 5 consecutive dates with a value of {target_value} found.")
+if consecutive_count < 2:
+    print(f"No 2 consecutive dates with a value of {target_value} found.")
 
