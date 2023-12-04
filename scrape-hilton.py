@@ -38,7 +38,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
 
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2024-09','2024-11', '2024-10', '2024-12' , '2025-01' , '2025-02' ]
+    dates = ['2024-09','2024-11']#, '2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
