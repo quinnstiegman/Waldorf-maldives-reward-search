@@ -34,20 +34,11 @@ driver = webdriver.Chrome(options=options)
 # Save the results to a CSV file
 previous_prices = {}
 csv_file_path = 'output_results.csv'
-# try:
-#     with open(csv_file_path, 'r', newline='', encoding='utf-8') as csv_file:
-#         csv_reader = csv.reader(csv_file)
-#         next(csv_reader)  # Skip header
-#         for row in csv_reader:
-#             date, price, timestamp = row
-#             previous_prices[date] = (price, timestamp)
-# except FileNotFoundError:
-    # pass 
 with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
 
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2024-12' , '2025-01' , '2025-02' ]
+    dates = ['2024-11', '2024-10', '2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
@@ -87,4 +78,39 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
 
         # Quit the browser
         driver.quit()
+
+# check for 5 consectuve nights
+
+# Read the CSV file
+with open(csv_file_path, 'r') as file:
+    reader = csv.reader(file)
+    rows = list(reader)
+
+# Initialize variables
+consecutive_count = 0
+target_value = '150k'
+
+# Iterate through the rows starting from the second row
+for i in range(1, len(rows) - 4):
+    date = rows[i][0]
+    value = rows[i][1]
+
+    # Check if the value is equal to the target value
+    if value == str(target_value):
+        # Check the next 4 consecutive dates
+        if all(rows[i + j][1] == str(target_value) for j in range(1, 5)):
+            consecutive_count += 1
+
+            # If 5 consecutive dates are found, print the result and break the loop
+            if consecutive_count == 2:
+                print(f"Found 5 consecutive dates with a value of {target_value} starting from {date}")
+                break
+        else:
+            consecutive_count = 0
+    else:
+        consecutive_count = 0
+
+# If no consecutive dates are found, print a message
+if consecutive_count < 5:
+    print(f"No 5 consecutive dates with a value of {target_value} found.")
 
