@@ -4,13 +4,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
-import http.client, urllib
-from pushover import init, Client
 import os
 import requests
 
