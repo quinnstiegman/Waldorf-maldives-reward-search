@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
 import http.client, urllib
+from pushover import init, Client
+import os
 
 # Function to wait for the presence of either price or rate_not_available element
 def wait_for_elements(driver):
@@ -24,7 +26,9 @@ def wait_for_elements(driver):
     except TimeoutException:
         print("Neither element appeared within 30 seconds. Moving on.")
 
-
+# grab env vars
+api_key = os.environ.get("API_KEY")
+user_key = os.environ.get("USER_KEY")
 # Set up a headless Chrome browser
 options = Options()
 options.add_argument('--disable-gpu')
@@ -107,14 +111,8 @@ for i in range(len(data) - 4):
 # Print the results
 if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
-    conn = http.client.HTTPSConnection("api.pushover.net:443")
-    conn.request("POST", "/1/messages.json",
-    urllib.parse.urlencode({
-        "token": "amgjddx35wi2ifdh886wvrq6hxvzjz",
-        "user": "uf4t2art8xmhmbr432x85qvac9uk92",
-        "message": f"2 consecutive nights found starting {two_consecutive_150k_start}",
-    }), { "Content-type": "application/x-www-form-urlencoded" })
-    conn.getresponse()
+    init(f"{api_key}")
+    Client(f"{user_key}").send_message(f"Two consecutive standard reward nights found starrting on {two_consecutive_150k_start}", title="Reward availiablity WA Maldives")
 else:
     print('There are no two consecutive dates with the value of "150k".')
 
