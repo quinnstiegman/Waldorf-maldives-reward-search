@@ -116,7 +116,12 @@ if two_consecutive_150k_start:
     'message': message,
     }
 
-    requests.post(url, data=data)
+    response = requests.post(url, data=data)
+
+    if response.status_code == 200:
+        print('Message sent successfully')
+    else:
+        print(f'Failed to send message. Status code: {response.status_code}, Response: {response.text}')
 else:
     print('There are no two consecutive dates with the value of "150k".')
 
