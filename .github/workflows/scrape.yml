@@ -24,8 +24,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install selenium beautifulsoup4
         pip install pandas
-        pip install --upgrade pip setuptools==57.5.0
-        pip install --upgrade python-pushover
 
     - uses: browser-actions/setup-chrome@v1
       with:
