@@ -26,9 +26,7 @@ def wait_for_elements(driver):
 
 # grab env vars
 api_token = os.environ.get("API_KEY")
-print(api_token)
 user_key = os.environ.get("USER_KEY")
-print(user_key)
 # Set up a headless Chrome browser
 options = Options()
 options.add_argument('--disable-gpu')
