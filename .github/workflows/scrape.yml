@@ -22,8 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium beautifulsoup4
-        pip install pandas
+        pip install selenium beautifulsoup4 pandas requests
 
     - uses: browser-actions/setup-chrome@v1
       with:
