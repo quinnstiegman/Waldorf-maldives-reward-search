@@ -22,7 +22,8 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install selenium beautifulsoup4
+        pip install pandas
         pip install --upgrade pip setuptools==57.5.0
         pip install --upgrade python-pushover
 
