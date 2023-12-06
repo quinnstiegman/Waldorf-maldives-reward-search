@@ -109,7 +109,6 @@ condition_value = "false"
 # Print the results
 if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
-    condition_value = "true" 
     # message = 'test message'
     # data = {
     # 'token': api_token,
@@ -131,5 +130,6 @@ if five_consecutive_150k_start:
 else:
     print('There are no five consecutive dates with the value of "150k".')
 
+condition_value = "true" 
 os.environ["condition_value"] = condition_value
 
