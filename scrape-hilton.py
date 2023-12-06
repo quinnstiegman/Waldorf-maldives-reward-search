@@ -131,5 +131,5 @@ if five_consecutive_150k_start:
 else:
     print('There are no five consecutive dates with the value of "150k".')
 
-print(f"{condition_value}")
+os.environ["condition_value"] = condition_value
 

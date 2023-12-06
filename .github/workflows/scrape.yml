@@ -31,9 +31,7 @@ jobs:
     - name: Run script
       id: run-script
       run: |
-        output=$(python scrape-hilton.py)
-        IFS= read -r condition_value <<< "$output"
-        echo "condition_value" >> $GITHUB_OUTPUT
+        python scrape-hilton.py
       env:
         API_KEY: ${{ secrets.PO_API_KEY }}
         USER_KEY: ${{ secrets.PO_USER_KEY }}
