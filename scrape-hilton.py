@@ -132,5 +132,5 @@ else:
 
 condition_value = "true" 
 os.environ["condition_value"] = condition_value
-print(f"condition_value={condition_value}>> $GITHUB_OUTPUT")
+print(f"'condition_value={condition_value}'>> $GITHUB_OUTPUT")
 
