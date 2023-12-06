@@ -105,23 +105,24 @@ for i in range(len(data) - 4):
        data['price'][i + 4] == '150K':
         five_consecutive_150k_start = data['date'][i]
         break
-
+condition_value = "false"
 # Print the results
 if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
-    message = 'test message'
-    data = {
-    'token': api_token,
-    'user': user_key,
-    'message': message,
-    }
+    condition_value = "true" 
+    # message = 'test message'
+    # data = {
+    # 'token': api_token,
+    # 'user': user_key,
+    # 'message': message,
+    # }
 
-    response = requests.post(url, data=data)
+    # response = requests.post(url, data=data)
 
-    if response.status_code == 200:
-        print('Message sent successfully')
-    else:
-        print(f'Failed to send message. Status code: {response.status_code}, Response: {response.text}')
+    # if response.status_code == 200:
+    #     print('Message sent successfully')
+    # else:
+    #     print(f'Failed to send message. Status code: {response.status_code}, Response: {response.text}')
 else:
     print('There are no two consecutive dates with the value of "150k".')
 

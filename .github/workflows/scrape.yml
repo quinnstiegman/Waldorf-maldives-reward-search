@@ -29,7 +29,10 @@ jobs:
         chrome-version: 114
 
     - name: Run script
-      run: python scrape-hilton.py
+      run: |
+        output=$(python scrape-hilton.py)
+        IFS=',' read -r output_value1 output_value2 condition_value <<< "$output"
+        echo "::set-output name=condition_value::$condition_value"
       env:
         API_KEY: ${{ secrets.PO_API_KEY }}
         USER_KEY: ${{ secrets.PO_USER_KEY }}
