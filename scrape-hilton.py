@@ -131,6 +131,6 @@ else:
     print('There are no five consecutive dates with the value of "150k".')
 
 condition_value = "true" 
-os.environ["condition_value"] = condition_value
-print(f"'condition_value={condition_value}'>> $GITHUB_OUTPUT")
+with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
+    print(f'condition_value={condition_value}', file=fh)
 
