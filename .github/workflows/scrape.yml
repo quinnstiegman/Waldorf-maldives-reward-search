@@ -42,7 +42,7 @@ jobs:
         cat output_results.csv
 
     - name: Push Build Status Notifications
-      if: ${{ always() }}
+      if: ${{ steps.run-script.outputs.condition_value == 'true' }}
       uses: desiderati/github-action-pushover@v1
       with:
         job-status: ${{ job.status }}
