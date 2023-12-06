@@ -32,6 +32,8 @@ jobs:
       id: run-script
       run: |
         python scrape-hilton.py
+        echo "condition_value" >> $GITHUB_OUTPUT
+
       env:
         API_KEY: ${{ secrets.PO_API_KEY }}
         USER_KEY: ${{ secrets.PO_USER_KEY }}
