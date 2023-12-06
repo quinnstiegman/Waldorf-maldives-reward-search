@@ -39,9 +39,9 @@ jobs:
         cat output_results.csv
 
     - name: Push Build Status Notifications
-        if: ${{ always() }}
-        uses: desiderati/github-action-pushover@v1
-        with:
-          job-status: ${{ job.status }}
-          pushover-api-token: ${{ secrets.PO_API_KEY }}
-          pushover-user-key: ${{ secrets.PO_USER_KEY }}
+      if: ${{ always() }}
+      uses: desiderati/github-action-pushover@v1
+      with:
+        job-status: ${{ job.status }}
+        pushover-api-token: ${{ secrets.PO_API_KEY }}
+        pushover-user-key: ${{ secrets.PO_USER_KEY }}
