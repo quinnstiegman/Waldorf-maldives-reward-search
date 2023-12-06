@@ -132,4 +132,5 @@ else:
 
 condition_value = "true" 
 os.environ["condition_value"] = condition_value
+print(f"Output value: {os.environ['condition_value']}")
 

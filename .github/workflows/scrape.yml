@@ -39,6 +39,9 @@ jobs:
     - name: Print File Contents
       run: |
         cat output_results.csv
+    - name: Print condition_value
+      run: |
+        echo "condition_value: ${{ steps.run-script.outputs.condition_value }}"
 
     - name: Push Build Status Notifications
       if: ${{ steps.run-script.outputs.condition_value == 'true' }}
