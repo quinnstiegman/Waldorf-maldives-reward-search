@@ -58,4 +58,4 @@ jobs:
         user: ${{ secrets.PO_USER_KEY }}
         token: ${{ secrets.PO_API_KEY }}
         title: Award availiability
-        message: Sample message
+        message: Starting on ${{ steps.run-script.outputs.start_date }}

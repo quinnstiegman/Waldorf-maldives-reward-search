@@ -133,4 +133,5 @@ else:
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
     print(f'condition_value={condition_value}', file=fh)
+    print(f'start_date={five_consecutive_150k_start}', file=fh)
 
