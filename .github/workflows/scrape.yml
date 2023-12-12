@@ -44,10 +44,18 @@ jobs:
       run: |
         echo "condition_value: ${{ steps.run-script.outputs.condition_value }}"
 
+    # - name: Push Build Status Notifications
+    #   if: ${{ steps.run-script.outputs.condition_value == 'true' }}
+    #   uses: desiderati/github-action-pushover@v1
+    #   with:
+    #     job-status: ${{ job.status }}
+    #     pushover-api-token: ${{ secrets.PO_API_KEY }}
+    #     pushover-user-key: ${{ secrets.PO_USER_KEY }}
     - name: Push Build Status Notifications
       if: ${{ steps.run-script.outputs.condition_value == 'true' }}
-      uses: desiderati/github-action-pushover@v1
+      uses: zerok/pushover-action@master
       with:
-        job-status: ${{ job.status }}
-        pushover-api-token: ${{ secrets.PO_API_KEY }}
-        pushover-user-key: ${{ secrets.PO_USER_KEY }}
+        user: ${{ secrets.PO_USER_KEY }}
+        token: ${{ secrets.PO_API_KEY }}
+        title: Award availiability
+        message: Sample message
