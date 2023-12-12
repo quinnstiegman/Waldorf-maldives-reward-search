@@ -52,7 +52,7 @@ jobs:
     #     pushover-api-token: ${{ secrets.PO_API_KEY }}
     #     pushover-user-key: ${{ secrets.PO_USER_KEY }}
     - name: Push Build Status Notifications
-      #if: ${{ steps.run-script.outputs.condition_value == 'true' }}
+      if: ${{ steps.run-script.outputs.condition_value == 'true' }}
       uses: zerok/pushover-action@master
       with:
         user: ${{ secrets.PO_USER_KEY }}
