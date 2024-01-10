@@ -42,7 +42,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['date', 'price', 'timestamp'])
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2024-10','2024-11','2024-12']#, '2024-12' , '2025-01' , '2025-02' ]
+    dates = ['2024-12', '2025-01']#, '2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
@@ -106,6 +106,29 @@ for i in range(len(data) - 4):
         five_consecutive_150k_start = data['date'][i]
         break
 condition_value = "false"
+
+five_consecutive_150k_starts_list = []
+consecutive_count = 0
+
+for i in range(len(data) - 4):
+    if (
+        data['price'][i] == '150K'
+        and data['price'][i + 1] == '150K'
+        and data['price'][i + 2] == '150K'
+        and data['price'][i + 3] == '150K'
+        and data['price'][i + 4] == '150K'
+    ):
+        five_consecutive_150k_starts_list.append(data['date'][i])
+        consecutive_count += 1
+
+# Print or use the list of start dates
+if consecutive_count > 0:
+    print("Found", consecutive_count, "sets of 5 consecutive dates:")
+    for start_date in five_consecutive_150k_starts_list:
+        print(start_date)
+else:
+    print("No sets of 5 consecutive dates found.")
+
 # Print the results
 if two_consecutive_150k_start:
     print(f'There are two consecutive dates with the value of "150k". Starting date: {two_consecutive_150k_start}')
@@ -135,4 +158,5 @@ with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
     print(f'condition_value={condition_value}', file=fh)
     print(f'start_date={five_consecutive_150k_start}', file=fh)
     print(f'url={url}', file=fh)
+    print(f'start_date_list={five_consecutive_150k_starts_list}', file=fh)
 
