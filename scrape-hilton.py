@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
@@ -24,6 +24,18 @@ def wait_for_elements(driver):
     except TimeoutException:
         print("Neither element appeared within 30 seconds. Moving on.")
 
+def get_last_n_months(n):
+    current_date = datetime.now()
+    months_list = []
+
+    for i in range(n):
+        # Subtracting 'i' months from the current date
+        target_date = current_date - timedelta(days=current_date.day)
+        target_date = target_date.replace(month=current_date.month - i)
+        months_list.append(target_date.strftime('%Y-%m'))
+
+    return months_list
+
 # grab env vars
 api_token = os.environ.get("API_KEY")
 user_key = os.environ.get("USER_KEY")
@@ -42,7 +54,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['date', 'price', 'timestamp'])
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2024-12', '2025-01']#, '2024-12' , '2025-01' , '2025-02' ]
+    dates = get_last_n_months(3)
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
