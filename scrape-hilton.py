@@ -1,11 +1,10 @@
 import csv
-import undetected_chromedriver as uc
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from datetime import datetime, timedelta
+from datetime import datetime
 from bs4 import BeautifulSoup
 from selenium.common.exceptions import TimeoutException
 import pandas as pd
@@ -25,29 +24,16 @@ def wait_for_elements(driver):
     except TimeoutException:
         print("Neither element appeared within 30 seconds. Moving on.")
 
-def get_last_n_months(n):
-    current_date = datetime.now()
-    months_list = []
-
-    for i in range(n):
-        # Subtracting 'i' months from the current date
-        target_date = current_date - timedelta(days=current_date.day)
-        target_date = target_date.replace(month=current_date.month - i)
-        months_list.append(target_date.strftime('%Y-%m'))
-
-    return months_list
-
 # grab env vars
 api_token = os.environ.get("API_KEY")
 user_key = os.environ.get("USER_KEY")
 # Set up a headless Chrome browser
-options = uc.ChromeOptions()
+options = Options()
 options.add_argument('--disable-gpu')
-# user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-# options.add_argument(f'user-agent={user_agent}')
+user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
-# Set up the Chrome driver
-driver = uc.Chrome(options=options, version_main=122)
+driver = webdriver.Chrome(options=options)
 
 # Save the results to a CSV file
 previous_prices = {}
@@ -56,11 +42,13 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['date', 'price', 'timestamp'])
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2025-02', '2025-03']
+    dates = ['2024-12', '2025-01']#, '2024-12' , '2025-01' , '2025-02' ]
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
 
+        # Set up the Chrome driver
+        driver = webdriver.Chrome(options=options)
         driver.get(url)
         
          # Wait for either element to be present
@@ -92,8 +80,8 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 csv_writer.writerow([date,reason, timestamp])
 
-# Quit the browser
-driver.quit()
+        # Quit the browser
+        driver.quit()
 
 # check for 5 consectuve nights
 
@@ -171,4 +159,5 @@ with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
     print(f'start_date={five_consecutive_150k_start}', file=fh)
     print(f'url={url}', file=fh)
     print(f'start_date_list={five_consecutive_150k_starts_list}', file=fh)
+
 
