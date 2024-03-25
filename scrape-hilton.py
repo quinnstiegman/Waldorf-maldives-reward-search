@@ -1,4 +1,5 @@
 import csv
+import undetected_chromedriver as uc
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -40,12 +41,12 @@ def get_last_n_months(n):
 api_token = os.environ.get("API_KEY")
 user_key = os.environ.get("USER_KEY")
 # Set up a headless Chrome browser
-options = Options()
+options = uc.ChromeOptions()
 options.add_argument('--disable-gpu')
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
-driver = webdriver.Chrome(options=options)
+driver = uc.Chrome(options=options)
 
 # Save the results to a CSV file
 previous_prices = {}
