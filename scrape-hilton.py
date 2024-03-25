@@ -46,7 +46,8 @@ options.add_argument('--disable-gpu')
 user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
 options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
-# driver = uc.Chrome(options=options)
+# Set up the Chrome driver
+driver = uc.Chrome(options=options, version_main=122)
 
 # Save the results to a CSV file
 previous_prices = {}
@@ -60,8 +61,6 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
 
-        # Set up the Chrome driver
-        driver = uc.Chrome(options=options, version_main=122)
         driver.get(url)
         
          # Wait for either element to be present
