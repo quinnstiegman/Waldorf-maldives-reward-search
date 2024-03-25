@@ -43,8 +43,8 @@ user_key = os.environ.get("USER_KEY")
 # Set up a headless Chrome browser
 options = uc.ChromeOptions()
 options.add_argument('--disable-gpu')
-user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-options.add_argument(f'user-agent={user_agent}')
+# user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+# options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
 # Set up the Chrome driver
 driver = uc.Chrome(options=options, version_main=122)
@@ -92,8 +92,8 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 csv_writer.writerow([date,reason, timestamp])
 
-        # Quit the browser
-        driver.quit()
+# Quit the browser
+driver.quit()
 
 # check for 5 consectuve nights
 
