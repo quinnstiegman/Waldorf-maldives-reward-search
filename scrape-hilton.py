@@ -35,7 +35,14 @@ user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
 driver = webdriver.Chrome(options=options)
-
+driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+  "source": """
+    Object.defineProperty(navigator, 'webdriver', {
+      get: () => undefined
+    })
+  """
+})
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'})
 # Save the results to a CSV file
 previous_prices = {}
 csv_file_path = 'output_results.csv'
