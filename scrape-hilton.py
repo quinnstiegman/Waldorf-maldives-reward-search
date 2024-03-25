@@ -10,6 +10,7 @@ from selenium.common.exceptions import TimeoutException
 import pandas as pd
 import os
 import requests
+import undetected_chromedriver as uc
 
 # Function to wait for the presence of either price or rate_not_available element
 def wait_for_elements(driver):
@@ -28,13 +29,13 @@ def wait_for_elements(driver):
 api_token = os.environ.get("API_KEY")
 user_key = os.environ.get("USER_KEY")
 # Set up a headless Chrome browser
-options = Options()
+options = uc.ChromeOptions()
 options.add_argument('--disable-gpu')
-options.add_argument("--disable-extensions")
-user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
-options.add_argument(f'user-agent={user_agent}')
+# options.add_argument("--disable-extensions")
+# user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36'
+# options.add_argument(f'user-agent={user_agent}')
 options.add_argument('--headless')
-driver = webdriver.Chrome(options=options)
+driver = uc.Chrome(options=options)
 driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
   "source": """
     Object.defineProperty(navigator, 'webdriver', {
@@ -55,8 +56,6 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
 
-        # Set up the Chrome driver
-        driver = webdriver.Chrome(options=options)
         driver.get(url)
         
          # Wait for either element to be present
@@ -88,8 +87,8 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                 csv_writer.writerow([date,reason, timestamp])
 
-        # Quit the browser
-        driver.quit()
+# Quit the browser
+driver.quit()
 
 # check for 5 consectuve nights
 
