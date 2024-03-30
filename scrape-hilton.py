@@ -25,6 +25,18 @@ def wait_for_elements(driver):
     except TimeoutException:
         print("Neither element appeared within 30 seconds. Moving on.")
 
+def get_months(n):
+    future_date = datetime.now() + timedelta(days=304)  
+    months_list = []
+
+    for i in range(n):
+        # Adding 'i' months to the future date
+        target_date = future_date + timedelta(days=future_date.day - 1)  # Go to the last day of the month
+        target_date = target_date.replace(month=future_date.month + i)
+        months_list.append(target_date.strftime('%Y-%m'))
+
+    return months_list
+
 # grab env vars
 api_token = os.environ.get("API_KEY")
 user_key = os.environ.get("USER_KEY")
@@ -51,7 +63,7 @@ with open(csv_file_path, 'w', newline='', encoding='utf-8') as csv_file:
     csv_writer = csv.writer(csv_file)
     csv_writer.writerow(['date', 'price', 'timestamp'])
     # Iterate through different variations of the URL by changing a small part
-    dates = ['2024-12', '2025-01']#, '2024-12' , '2025-01' , '2025-02' ]
+    dates = get_months(4)
     for date in dates:  # Change the range or logic as needed
         # Create the complete URL
         url = f'https://www.hilton.com/en/book/reservation/flexibledates/?ctyhocn=MLEONWA&arrivalDate={date}-20&departureDate={date}-21&redeemPts=true&room1NumAdults=1&displayCurrency=USD'
