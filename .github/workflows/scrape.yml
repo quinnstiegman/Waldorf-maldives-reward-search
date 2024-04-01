@@ -3,8 +3,8 @@ name: Run Price Scraper
 on:
   workflow_dispatch:
   
-  # schedule:
-  #   - cron: '2/15 * * * *'  # Schedule the workflow to run every 15 minutes starting on minute 2 of each hour
+  schedule:
+    - cron: '2/5 * * * *'  # Schedule the workflow to run every 15 minutes starting on minute 2 of each hour
 
 jobs:
   run_scraper:
