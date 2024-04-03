@@ -119,11 +119,11 @@ for i in range(len(data) - 1):
 # Check for five consecutive dates with the value '150k'
 five_consecutive_150k_start = None
 for i in range(len(data) - 4):
-    if data['price'][i] == '150K' and \
-       data['price'][i + 1] == '150K' and \
-       data['price'][i + 2] == '150K' and \
-       data['price'][i + 3] == '150K' and \
-       data['price'][i + 4] == '150K':
+    if data['price'][i] == '150,000' and \
+       data['price'][i + 1] == '150,000' and \
+       data['price'][i + 2] == '150,000' and \
+       data['price'][i + 3] == '150,000' and \
+       data['price'][i + 4] == '150,000':
         five_consecutive_150k_start = data['date'][i]
         break
 condition_value = "false"
@@ -133,11 +133,11 @@ consecutive_count = 0
 
 for i in range(len(data) - 4):
     if (
-        data['price'][i] == '150K'
-        and data['price'][i + 1] == '150K'
-        and data['price'][i + 2] == '150K'
-        and data['price'][i + 3] == '150K'
-        and data['price'][i + 4] == '150K'
+        data['price'][i] == '150,000'
+        and data['price'][i + 1] == '150,000'
+        and data['price'][i + 2] == '150,000'
+        and data['price'][i + 3] == '150,000'
+        and data['price'][i + 4] == '150,000'
     ):
         five_consecutive_150k_starts_list.append(data['date'][i])
         consecutive_count += 1
