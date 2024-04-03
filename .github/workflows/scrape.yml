@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   
   schedule:
-    - cron: '*/5 * * * *'  # Schedule the workflow to run every 5 minutes starting on minute 2 of each hour
+    - cron: '*/5 * * * *'  # Schedule the workflow to run every 5 minutes
 
 jobs:
   run_scraper:
