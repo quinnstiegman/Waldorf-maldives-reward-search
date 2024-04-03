@@ -14,19 +14,20 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install selenium beautifulsoup4 pandas requests undetected-chromedriver
-
     - uses: browser-actions/setup-chrome@v1
       with:
         chrome-version: 122
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install pipenv        
+      run: pip install pipenv 
+
+    - name: Install dependencies using pipenv        
+      run: pipenv install --deploy --system 
 
     - name: Run script
       id: run-script
