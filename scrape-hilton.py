@@ -112,7 +112,7 @@ data = pd.read_csv(csv_file_path)
 # Check for two consecutive dates with the value '150k'
 two_consecutive_150k_start = None
 for i in range(len(data) - 1):
-    if data['price'][i] == '150K' and data['price'][i + 1] == '150K':
+    if data['price'][i] == '150,000' and data['price'][i + 1] == '150,000':
         two_consecutive_150k_start = data['date'][i]
         break
 
