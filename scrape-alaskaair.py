@@ -23,7 +23,7 @@ try:
 
     # Wait for the element to be present
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CLASS_NAME, "valuetile partner-business"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".miles.svelte-1oypwk2"))
     )
     print(element.text)
 
