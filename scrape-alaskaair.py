@@ -1,10 +1,18 @@
+import csv
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime, timedelta
+from bs4 import BeautifulSoup
+from selenium.common.exceptions import TimeoutException
+import pandas as pd
+import os
+from seleniumbase import Driver
 
 # Set up WebDriver (replace with the path to your driver executable)
-driver = webdriver.Chrome()
+driver = Driver(uc=True, headless=True, disable_gpu=True)
 
 try:
     # Define the target URL, gift card number, and list of PIN numbers
