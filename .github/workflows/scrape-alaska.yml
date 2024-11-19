@@ -1,0 +1,35 @@
+name: Run Alaska Scraper
+
+on:
+  workflow_dispatch:
+  
+  # schedule:
+  #   - cron: '*/10 * * * *'  # Schedule the workflow to run every 10 minutes
+
+jobs:
+  run_scraper:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: 122
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.11
+
+    - name: Install pipenv        
+      run: pip install pipenv 
+
+    - name: Install dependencies using pipenv        
+      run: pipenv install --deploy --system 
+
+    - name: Run script
+      id: run-script
+      run: |
+        python scrape-alaskaair.py
