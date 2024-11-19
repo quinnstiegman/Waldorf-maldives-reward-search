@@ -13,6 +13,14 @@ from seleniumbase import Driver
 
 # Set up WebDriver (replace with the path to your driver executable)
 driver = Driver(headless=True,disable_gpu=True)
+driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+  "source": """
+    Object.defineProperty(navigator, 'webdriver', {
+      get: () => undefined
+    })
+  """
+})
+driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36'})
 
 try:
     # Define the target URL, gift card number, and list of PIN numbers
