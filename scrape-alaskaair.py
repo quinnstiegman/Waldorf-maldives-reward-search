@@ -12,7 +12,7 @@ import os
 from seleniumbase import Driver
 
 # Set up WebDriver (replace with the path to your driver executable)
-driver = Driver(headless=True,disable_gpu=True)
+driver = Driver(disable_gpu=True)
 driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
   "source": """
     Object.defineProperty(navigator, 'webdriver', {
@@ -31,7 +31,7 @@ try:
 
     # Wait for the element to be present
     element = WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, ".miles.svelte-1oypwk2"))
+        EC.presence_of_element_located(((By.CSS_SELECTOR, "button[data-testid='valuetile-0-2']")))
     )
     print(element.text)
 
