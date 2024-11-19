@@ -12,7 +12,7 @@ import os
 from seleniumbase import Driver
 
 # Set up WebDriver (replace with the path to your driver executable)
-driver = Driver(uc=True, headless=True, disable_gpu=True)
+driver = Driver(headless=True,disable_gpu=True)
 
 try:
     # Define the target URL, gift card number, and list of PIN numbers
