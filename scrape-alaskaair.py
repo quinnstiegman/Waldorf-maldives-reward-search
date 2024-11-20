@@ -38,6 +38,22 @@ try:
 except:
     print('Day not availiable yet')
 
+try:
+    # Define the target URL, gift card number, and list of PIN numbers
+    url = "https://www.alaskaair.com/search/results?A=1&O=LA5&D=PPT&OD=2025-10-17&OT=Anytime&RT=false&UPG=none&ShoppingMethod=onlineaward&awardType=MilesOnly"  # Replace with the actual URL
+
+    # Navigate to the original page for each PIN attempt
+    driver.get(url)
+
+    # Wait for the element to be present
+    element = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "button[data-testid='valuetile-0-2']"))
+    )
+    print(element.text)
+
+except:
+    print('Day not availiable yet')
+
 finally:
     # Close the WebDriver
     driver.quit()
