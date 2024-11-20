@@ -26,7 +26,7 @@ try:
     print('PPT --> LAX')
     print('-------------------------------')
     # Define the target URL, gift card number, and list of PIN numbers
-    url = "https://www.alaskaair.com/search/results?A=1&O=PPT&D=LA5&OD=2025-10-17&OT=Anytime&RT=false&UPG=none&ShoppingMethod=onlineaward&awardType=MilesOnly"  # Replace with the actual URL
+    url = "https://www.alaskaair.com/search/results?A=1&O=PPT&D=LA5&OD=2025-10-18&OT=Anytime&RT=false&UPG=none&ShoppingMethod=onlineaward&awardType=MilesOnly"  # Replace with the actual URL
 
     # Navigate to the original page for each PIN attempt
     driver.get(url)
@@ -41,10 +41,11 @@ except:
     print('Day not availiable yet')
 
 try:
-    print('\n LAX --> PPT')
+    print('')
+    print('LAX --> PPT')
     print('-------------------------------')
     # Define the target URL, gift card number, and list of PIN numbers
-    url = "https://www.alaskaair.com/search/results?A=1&O=LA5&D=PPT&OD=2025-10-17&OT=Anytime&RT=false&UPG=none&ShoppingMethod=onlineaward&awardType=MilesOnly"  # Replace with the actual URL
+    url = "https://www.alaskaair.com/search/results?A=1&O=LA5&D=PPT&OD=2025-10-18&OT=Anytime&RT=false&UPG=none&ShoppingMethod=onlineaward&awardType=MilesOnly"  # Replace with the actual URL
 
     # Navigate to the original page for each PIN attempt
     driver.get(url)
