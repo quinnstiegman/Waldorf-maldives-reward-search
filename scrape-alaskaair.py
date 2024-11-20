@@ -35,6 +35,9 @@ try:
     )
     print(element.text)
 
+except:
+    print('Day not availiable yet')
+
 finally:
     # Close the WebDriver
     driver.quit()

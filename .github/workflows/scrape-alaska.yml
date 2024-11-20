@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   
   schedule:
-    - cron: '*/10 * * * *'  # Schedule the workflow to run every 10 minutes
+    - cron: '*/11 * * * *'  # Schedule the workflow to run every 10 minutes
 
 jobs:
   run_scraper:
