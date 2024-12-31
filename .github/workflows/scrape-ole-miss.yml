@@ -1,10 +1,10 @@
-name: Run Price Scraper
+name: Run Ole Miss Price Scraper
 
 on:
   workflow_dispatch:
   
-  # schedule:
-  #   - cron: '*/5 * * * *'  # Schedule the workflow to run every 5 minutes
+  schedule:
+    - cron: '*/11 * * * *'  # Schedule the workflow to run every 5 minutes
 
 jobs:
   run_scraper:
@@ -32,7 +32,7 @@ jobs:
     - name: Run script
       id: run-script
       run: |
-        python scrape-hilton.py
+        python scrape-ole-miss.py
 
       env:
         API_KEY: ${{ secrets.PO_API_KEY }}
@@ -58,6 +58,6 @@ jobs:
       with:
         user: ${{ secrets.PO_USER_KEY }}
         token: ${{ secrets.PO_API_KEY }}
-        title: Award availiability
-        message: Starting on ${{ steps.run-script.outputs.start_date }} Full list - ${{ steps.run-script.outputs.start_list }}
+        title: Ole Miss Football availiability
+        message: ${{ steps.run-script.outputs.result_string }}
         url: ${{ steps.run-script.outputs.url }}
