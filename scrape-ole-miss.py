@@ -164,9 +164,9 @@ if len(eligible_dates) > 0:
         price = row['price']
         timestamp = row['timestamp']
         hotel_name = row['hotel_name']
-        result_string += f"Date: {date}, Price: {price}, Timestamp: {timestamp}, Hotel Name: {hotel_name}"
+        result_string += f"Date: {date}\n\nPrice: {price}\n\nHotel Name: {hotel_name}"
     condition_value = "true"
-    result_string += f"Graduate URL: {url1}\n Tru URL: {url2}"
+    result_string += f"\nGraduate URL: {url1}\n Tru URL: {url2}"
 print(result_string)
 
 with open(os.environ['GITHUB_OUTPUT'], 'a') as fh:
