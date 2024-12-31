@@ -59,4 +59,5 @@ jobs:
         user: ${{ secrets.PO_USER_KEY }}
         token: ${{ secrets.PO_API_KEY }}
         title: Ole Miss Football availiability
-        message: ${{ steps.run-script.outputs.result_string }}
+        message: |
+          ${{ steps.run-script.outputs.result_string }}

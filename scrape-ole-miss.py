@@ -164,7 +164,7 @@ if len(eligible_dates) > 0:
         price = row['price']
         timestamp = row['timestamp']
         hotel_name = row['hotel_name']
-        result_string += f"Date: {date}\nPrice: {price}\nHotel Name: {hotel_name}"
+        result_string += f"""Date: {date}\nPrice: {price}\nHotel Name: {hotel_name}"""
     condition_value = "true"
     result_string += f"\nGraduate URL: {url1}\n Tru URL: {url2}"
 print(result_string)
