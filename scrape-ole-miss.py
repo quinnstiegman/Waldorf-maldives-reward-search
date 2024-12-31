@@ -11,8 +11,8 @@ import pandas as pd
 import os
 from seleniumbase import Driver
 
-TARGET_ARRIVAL = '2025-09-10'
-TARGET_DEPARTURE = '2025-09-11'
+TARGET_ARRIVAL = '2025-09-12'
+TARGET_DEPARTURE = '2025-09-14'
 
 # Function to wait for the presence of either price or rate_not_available element
 def wait_for_elements(driver):
