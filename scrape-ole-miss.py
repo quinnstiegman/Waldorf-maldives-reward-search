@@ -152,7 +152,7 @@ print(filtered_data)
 
 condition_value = "false"
 
-value_to_exclude = ['2 night stay unavailable', 'Sold out']
+value_to_exclude = ['2 night stay unavailable', 'Sold out', '', None]
 
 eligible_dates = filtered_data[~filtered_data['price'].isin(value_to_exclude)]
 
