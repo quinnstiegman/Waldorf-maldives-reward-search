@@ -27,6 +27,7 @@ def wait_for_elements(driver):
     except TimeoutException:
         print("Neither element appeared within 30 seconds. Moving on.")
 
+
 # Function to get the price for a specific date
 def get_price_for_date(date):
     # Filter the DataFrame for the specific date
@@ -152,7 +153,7 @@ print(filtered_data)
 
 condition_value = "false"
 
-value_to_exclude = ['2 night stay unavailable', 'Sold out', '', None]
+value_to_exclude = ['2 night stay unavailable', 'Sold out', '', None, ' ']
 
 eligible_dates = filtered_data[~filtered_data['price'].isin(value_to_exclude)]
 
