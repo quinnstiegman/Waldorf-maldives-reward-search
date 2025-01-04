@@ -163,6 +163,7 @@ if len(eligible_dates) > 0:
     for index, row in eligible_dates.iterrows():
         date = row['date']
         price = row['price']
+        print(f'len(price)={len(price)}')
         timestamp = row['timestamp']
         hotel_name = row['hotel_name']
         result_string += f"Date: {date} Price: {price} Hotel Name: {hotel_name}     "
