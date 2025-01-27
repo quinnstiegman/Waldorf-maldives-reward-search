@@ -3,8 +3,8 @@ name: Run Ole Miss Price Scraper
 on:
   workflow_dispatch:
   
-  schedule:
-    - cron: '*/11 * * * *'  # Schedule the workflow to run every 5 minutes
+  # schedule:
+  #   - cron: '*/11 * * * *'  # Schedule the workflow to run every 5 minutes
 
 jobs:
   run_scraper:
