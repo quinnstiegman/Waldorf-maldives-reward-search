@@ -34,7 +34,13 @@ jobs:
       run: |
         python scrape-alaskaair.py
 
+    - name: Check for changes
+      id: check_changes
+      run: |
+        git diff --exit-code || echo "Changes detected"
+
     - name: Commit and push changes
+      if: steps.check_changes.outputs.changes_detected == 'true'
       run: |
         git config --global user.name 'quinnstiegman'
         git config --global user.email 'quinn.stiegman@gmail.com'
