@@ -51,4 +51,5 @@ jobs:
         git add scrape_results.csv    
         git commit -m "Update scrape results"    
         git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/quinnstiegman/Waldorf-maldives-reward-search.git 
-      env:    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      env:    
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
