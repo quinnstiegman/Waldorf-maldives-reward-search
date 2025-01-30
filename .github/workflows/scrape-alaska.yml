@@ -11,8 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        persist-credentials: false # Prevents conflicts with PAT
 
     - uses: browser-actions/setup-chrome@v1
       with:
@@ -51,5 +53,3 @@ jobs:
         git add scrape_results.csv    
         git commit -m "Update scrape results"    
         git push https://x-access-token:${{ secrets.GH_PAT }}@github.com/quinnstiegman/Waldorf-maldives-reward-search.git 
-      env:    
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
