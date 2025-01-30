@@ -37,10 +37,14 @@ jobs:
     - name: Check for changes
       id: check_changes
       run: |
-        git diff --exit-code || echo "Changes detected"
+        if git diff --quiet; then
+          echo "changes_detected=false" >> "$GITHUB_ENV"
+        else
+          echo "changes_detected=true" >> "$GITHUB_ENV"
+        fi
 
     - name: Commit and push changes
-      if: steps.check_changes.outputs.changes_detected == 'true'
+      if: env.changes_detected == 'true'
       run: |
         git config --global user.name 'quinnstiegman'
         git config --global user.email 'quinn.stiegman@gmail.com'
