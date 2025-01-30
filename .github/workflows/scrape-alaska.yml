@@ -36,8 +36,8 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --global user.name 'github-actions[bot]'
-        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git config --global user.name 'quinnstiegman'
+        git config --global user.email 'quinn.stiegman@gmail.com'
         git add scrape_results.csv
         git commit -m "Update scrape results"
         git push
