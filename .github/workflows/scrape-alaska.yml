@@ -34,7 +34,12 @@ jobs:
     - name: Run script
       id: run-script
       run: |
-        python scrape-alaskaair.py
+        python scrape-alaskaair.py 1
+
+    - name: Run script 2
+      id: run-script2
+      run: |
+        python scrape-alaskaair.py 2
 
     - name: Check for changes
       id: check_changes
