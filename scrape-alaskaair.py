@@ -14,7 +14,7 @@ import sys
 
 route = sys.argv[1]
 
-future_date = datetime.now() + timedelta(days=331)
+future_date = datetime.now() + timedelta(days=330)
 formatted_date = future_date.strftime('%Y-%m-%d')
 print(formatted_date)
 # Set up WebDriver (replace with the path to your driver executable)
