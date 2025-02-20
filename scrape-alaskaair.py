@@ -32,7 +32,7 @@ driver.execute_cdp_cmd('Network.setUserAgentOverride', {"userAgent": 'Mozilla/5.
 csv_file_path = 'scrape_results.csv'
 csv_headers = ['Date', 'Route','Price', 'Timestamp']
 
-if route == 1:
+if route == '1':
     try:
         with open(csv_file_path, mode='a', newline='') as file:
             csv_writer = csv.writer(file)
@@ -57,7 +57,7 @@ if route == 1:
     except:
         print('Day not availiable yet')
 
-if route == 2:
+if route == '2':
     try:
         with open(csv_file_path, mode='a', newline='') as file:
             csv_writer = csv.writer(file)
