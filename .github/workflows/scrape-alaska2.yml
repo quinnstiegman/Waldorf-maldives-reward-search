@@ -1,12 +1,12 @@
-name: Run Alaska Scraper
+name: Run Alaska Scraper 2
 
 on:
   workflow_dispatch:
   
   schedule:
-    - cron: '10 * * * *' 
-    - cron: '30 * * * *'
-    - cron: '50 * * * *' # Schedule the workflow to run every 10 minutes
+    - cron: '0 * * * *' 
+    - cron: '20 * * * *'
+    - cron: '40 * * * *' # Schedule the workflow to run every 10 minutes
 
 jobs:
   run_scraper:
@@ -33,11 +33,10 @@ jobs:
     - name: Install dependencies using pipenv        
       run: pipenv install --deploy --system 
 
-    - name: Run script
-      id: run-script
+    - name: Run script 2
+      id: run-script2
       run: |
-        python scrape-alaskaair.py 1
-
+        python scrape-alaskaair.py 2
 
     - name: Check for changes
       id: check_changes
