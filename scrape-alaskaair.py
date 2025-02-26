@@ -13,7 +13,7 @@ from seleniumbase import Driver
 import sys
 
 
-route = sys.argv[1]
+route_code = sys.argv[1]
 days_list = [330,331]
 # Set up WebDriver (replace with the path to your driver executable)
 driver = Driver(uc=True,headless=True, disable_gpu=True)
@@ -34,8 +34,7 @@ for days in days_list:
     future_date = datetime.now() + timedelta(days=days)
     formatted_date = future_date.strftime('%Y-%m-%d')
     print(formatted_date)
-    print(route)
-    if route == '1':
+    if route_code == '1':
         try:
             with open(csv_file_path, mode='a', newline='') as file:
                 csv_writer = csv.writer(file)
@@ -60,7 +59,7 @@ for days in days_list:
         except:
             print('Day not availiable yet')
 
-    if route == '2':
+    if route_code == '2':
         try:
             with open(csv_file_path, mode='a', newline='') as file:
                 csv_writer = csv.writer(file)
