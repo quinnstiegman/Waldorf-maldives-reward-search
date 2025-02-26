@@ -34,6 +34,7 @@ for days in days_list:
     future_date = datetime.now() + timedelta(days=days)
     formatted_date = future_date.strftime('%Y-%m-%d')
     print(formatted_date)
+    print(route)
     if route == '1':
         try:
             with open(csv_file_path, mode='a', newline='') as file:
