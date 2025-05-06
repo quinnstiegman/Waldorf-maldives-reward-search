@@ -33,6 +33,7 @@ csv_headers = ['Date', 'Route','Price', 'Timestamp']
 for days in days_list:
     future_date = datetime.now() + timedelta(days=days)
     formatted_date = future_date.strftime('%Y-%m-%d')
+    print(datetime.now())
     print(formatted_date)
     if route_code == '1':
         try:
