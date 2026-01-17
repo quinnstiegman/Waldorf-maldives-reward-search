@@ -3,10 +3,10 @@ name: Run Alaska Scraper
 on:
   workflow_dispatch:
   
-  schedule:
-    - cron: '10 * * * *' 
-    - cron: '30 * * * *'
-    - cron: '50 * * * *' # Schedule the workflow to run every 10 minutes
+  # schedule:
+  #   - cron: '10 * * * *' 
+  #   - cron: '30 * * * *'
+  #   - cron: '50 * * * *' # Schedule the workflow to run every 10 minutes
 
 jobs:
   run_scraper:
